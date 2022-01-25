@@ -1,6 +1,6 @@
 {
   "name": "cs-activeviam-plugins",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Extra Activeviam plugins to install in ActiveUI",
   "repository": "git@github.com:mohamedalibarka/activeui-starter.git",
   "license": "MIT",
