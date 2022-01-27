@@ -8,7 +8,8 @@ interface TreeNode  {
     name: string;
     value: number;
     children: Array<TreeNode>;
-    parent: string
+    parent: string,
+    path: string
 }
 
 export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (props) => {
@@ -23,7 +24,8 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
                     name: path[0],
                     value: 0,
                     children: [],
-                    parent: tree.name
+                    parent: tree.path,
+                    path: tree.path+"/"+path[0]
                 })
             }
             const newPath = path.slice(1)
@@ -34,18 +36,25 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
                 name: path[0],
                 value: value,
                 children: [],
-                parent: tree.name
+                parent: tree.path,
+                path: tree.path+"/"+path[0]
             })
         }
         return tree
 
     };
 
-    const addToSunburst = (tree: TreeNode, parents: Array<any>, labels: Array<any>, values: Array<any>) => {
+    const addToSunburst = (tree: TreeNode,
+        parents: Array<any>, 
+        labels: Array<any>, 
+        values: Array<any>,
+        ids: Array<any>
+        ) => {
         parents.push(tree.parent);
         labels.push(tree.name);
         values.push(tree.value);
-        tree.children.forEach(node => addToSunburst(node, parents, labels, values));
+        ids.push(tree.path);
+        tree.children.forEach(node => addToSunburst(node, parents, labels, values, ids));
     }
     
     const container = useRef<HTMLDivElement>(null);
@@ -72,8 +81,9 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
     const sunburstValues = data.cells;
 
     const title = data.axes[0].positions[0][0].namePath[0]
-    const labels: Array<any> = [];
 
+    const ids: Array<any> = [];
+    const labels: Array<any> = [];
     const parents: Array<any> = [];
     const values: Array<any> = [];
 
@@ -83,7 +93,8 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
         name: title,
         value: 0,
         children: [],
-        parent: ""
+        parent: "",
+        path: ""
     }
 
     sunburstData.map((position,rowIndex) => {
@@ -97,8 +108,8 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
     tree.children.forEach(node => {
         tree.value += node.value
     })
-    addToSunburst(tree, parents, labels, values)
-
+    addToSunburst(tree, parents, labels, values, ids)
+    console.log(tree, parents, labels ,values, ids)
     return <div 
                 ref={container}
                 tabIndex={0}
@@ -115,6 +126,7 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
                     labels : labels,
                     parents: parents,
                     values: values,
+                    ids: ids,
                     marker: {
                         line: {
                             width: 2
