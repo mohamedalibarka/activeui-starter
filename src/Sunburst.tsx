@@ -1,6 +1,6 @@
 import React, { Children, FC, useRef } from "react";
 import useComponentSize from "@rehooks/component-size";
-import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify } from "@activeviam/activeui-sdk";
+import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify, withQueryResult } from "@activeviam/activeui-sdk";
 import Plot from "react-plotly.js";
 import Spin from "antd/lib/spin";
 
@@ -12,7 +12,7 @@ interface TreeNode  {
     path: string
 }
 
-export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (props) => {
+export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) => {
     const putInTree = (tree: TreeNode, path : Array<string>, value: any) => {
         if (path.length>1) {
             var foundIndex = tree.children.findIndex(child =>
@@ -56,17 +56,10 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
         ids.push(tree.path);
         tree.children.forEach(node => addToSunburst(node, parents, labels, values, ids));
     }
-    
+    const geoLayoutRef = useRef<Plotly.Layout["geo"] | undefined>({});
     const container = useRef<HTMLDivElement>(null);
     const { height, width } = useComponentSize(container);
-    const {data, error, isLoading} = useQueryResult({
-            serverKey: "my-server",
-            queryId: props.queryId,
-            query: {
-                ...props.widgetState.query,
-                mdx: stringify(props.widgetState.query.mdx!)
-            }
-    })
+    const {data, error, isLoading} =  props.queryResult
     if (isLoading || !data) {
         return <Spin />
     }
@@ -76,6 +69,9 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
     }
 
     console.log("Sunburst",isLoading, data);
+    if (data.axes.length < 2) {
+        return <Spin />
+    }
 
     const sunburstData = data.axes[1].positions;
     const sunburstValues = data.cells;
@@ -137,7 +133,9 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
             ]
         }
         layout={
-            {   height,
+            {   
+                geo: geoLayoutRef.current,
+                height,
                 width,
                 margin: {
                     l: 0,
@@ -151,4 +149,4 @@ export const Sunburst: FC<WidgetPluginProps<DataVisualizationWidgetState>> = (pr
 
       </Plot>
       </div>;
-};
+})

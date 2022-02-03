@@ -1,15 +1,31 @@
-import { DataVisualizationContentEditor, DataVisualizationWidgetState, WidgetPlugin, parse } from "@activeviam/activeui-sdk";
-
+import { 
+  DataVisualizationContentEditor, 
+  DataVisualizationWidgetState, 
+  WidgetPlugin, 
+  FiltersEditor, 
+  parse, 
+  CellSetSelection 
+} from "@activeviam/activeui-sdk";
 import { Sunburst } from "./Sunburst";
 import { IconSunburst } from "./IconSunburst";
 const widgetKey = "sunburst";
-
-export const pluginWidgetSunburst: WidgetPlugin<DataVisualizationWidgetState> = {
+export const pluginWidgetSunburst: WidgetPlugin<DataVisualizationWidgetState, CellSetSelection> = {
   Component: Sunburst,
+  category: "dataVisualization",
   contentEditor: DataVisualizationContentEditor,
+  filtersEditor: FiltersEditor,
   Icon: IconSunburst,
   attributes: {
-    rows: {
+    values: {
+      role: "primaryNumeric",
+      maxNumberOfFields: 1
+    },
+    groupBy: {
+      role: "primaryOrdinal",
+      maxNumberOfFields: 1
+    },
+    splitBy: {
+      isMainAxis: true,
       role: "primaryOrdinal"
     }
   },
@@ -37,13 +53,21 @@ export const pluginWidgetSunburst: WidgetPlugin<DataVisualizationWidgetState> = 
       `)
     },
     mapping: {
-      rows: [
+      values: [
+        {
+          type: "measure",
+          measureName: "Real GDP per capita (USD).MEAN"
+        }
+      ],
+      groupBy: [
         {
           type: "hierarchy",
           levelName: "Continent_Name",
           hierarchyName: "Country",
           dimensionName: "Countries"
-        },
+        }
+      ],
+      splitBy: [
         {
           type: "hierarchy",
           levelName: "Year",
@@ -57,7 +81,7 @@ export const pluginWidgetSunburst: WidgetPlugin<DataVisualizationWidgetState> = 
   translations: {
     "en-US": {
       key: "Sunburst",
-      defaultName: "New Sunburst"
-    }
+      defaultName: "New Sunburst",
+    },
   }
 };
