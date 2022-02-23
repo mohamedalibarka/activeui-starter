@@ -20,14 +20,13 @@ export const pluginWidgetSunburst: WidgetPlugin<DataVisualizationWidgetState, Ce
       role: "primaryNumeric",
       maxNumberOfFields: 1
     },
-    groupBy: {
+    rows: {
       role: "primaryOrdinal",
+    },
+    horizontalSubplots: {
+      role: "subplot",
       maxNumberOfFields: 1
     },
-    splitBy: {
-      isMainAxis: true,
-      role: "primaryOrdinal"
-    }
   },
   initialState: {
     widgetKey,
@@ -59,22 +58,21 @@ export const pluginWidgetSunburst: WidgetPlugin<DataVisualizationWidgetState, Ce
           measureName: "Real GDP per capita (USD).MEAN"
         }
       ],
-      groupBy: [
+      rows: [
         {
           type: "hierarchy",
           levelName: "Continent_Name",
           hierarchyName: "Country",
           dimensionName: "Countries"
-        }
-      ],
-      splitBy: [
+        },
         {
           type: "hierarchy",
           levelName: "Year",
           hierarchyName: "Year",
           dimensionName: "Green-growth"
         }
-      ]
+      ],
+      horizontalSubplots: []
     }
   },
   key: widgetKey,
