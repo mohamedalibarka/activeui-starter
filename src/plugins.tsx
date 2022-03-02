@@ -2,6 +2,8 @@ import _keyBy from "lodash/keyBy";
 import { pluginWidgetMap } from "./pluginWidgetMap"
 import { pluginWidgetSunburst } from "./pluginWidgetSunburst";
 import { pluginMenuItemFilterOnCountries } from "./pluginMenuItemFilterOnCountries";
+import { pluginMenuItemFilterSunburst} from "./pluginMenuItemFilterSunburst"
+import { pluginWidgetBoxplot} from "./pluginWidgetBoxplot"
 import {
   CellPlugin,
   CellStylePlugin,
@@ -77,6 +79,7 @@ const cellStylePlugins: Array<CellStylePlugin<any>> = [
 ];
 
 const menuItemPlugins: Array<MenuItemPlugin<any, any>> = [
+  pluginMenuItemFilterSunburst,
   pluginMenuItemFilterOnCountries,
   pluginMenuItemDuplicateWidget,
   pluginMenuItemFullScreen,
@@ -107,6 +110,7 @@ const titleBarButtonPlugins: Array<TitleBarButtonPlugin<any>> = [
 
 // Order matters: it controls the order of the icons in the widget ribbons.
 const widgetPlugins: Array<WidgetPlugin<any, any>> = [
+  pluginWidgetBoxplot,
   pluginWidgetPlotlyTreeMap,
   pluginWidgetSunburst,
   pluginWidgetMap,
@@ -175,6 +179,7 @@ pluginWidgetTreeTable.cellStyle = pluginCellStylePivotTable.key;
   },
 );
 pluginWidgetMap.contextMenuItems = [ "filter-on-countries" ];
+pluginWidgetSunburst.contextMenuItems = [ "filter-sunburst" ];
 pluginWidgetDrillthroughTable.menuItems = [
   pluginMenuItemRemoveWidget.key,
   pluginMenuItemDuplicateWidget.key,

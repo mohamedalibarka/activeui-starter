@@ -1,10 +1,11 @@
 import React, { Children, FC, useRef } from "react";
 import useComponentSize from "@rehooks/component-size";
-import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify, withQueryResult } from "@activeviam/activeui-sdk";
+import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify, withQueryResult, CellSetSelection } from "@activeviam/activeui-sdk";
 import Plot from "react-plotly.js";
 import Spin from "antd/lib/spin";
 import path from "path";
 import { Divider } from "antd";
+import { PlotDatum } from "plotly.js";
 
 interface TreeNode  {
     name: string;
@@ -13,8 +14,10 @@ interface TreeNode  {
     parent: string,
     path: string
 }
-
-export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) => {
+interface ClickData extends PlotDatum {
+    id?: string
+}
+export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSelection>((props) => {
     const putInTree = (tree: TreeNode, path : Array<string>, value: any) => {
         const pathSplit = path[0].split("-")
         const treeName = pathSplit[pathSplit.length-1]
@@ -29,7 +32,7 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) =>
                     value: 0,
                     children: [],
                     parent: tree.path,
-                    path: tree.path+"/"+path[0]
+                    path: tree.path+"->"+path[0]
                 })
             }
             const newPath = path.slice(1)
@@ -41,14 +44,17 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) =>
                 value: value,
                 children: [],
                 parent: tree.path,
-                path: tree.path+"/"+path[0]
+                path: tree.path+"->"+path[0]
             })
         }
         return tree
 
     };
-    const handleHover = (payload: Plotly.PlotMouseEvent) => {
-        console.log(payload)
+    const handleClick = (payload: Plotly.PlotMouseEvent) => {
+        const data : ClickData = payload.points[0]
+        console.log(data.id)
+        const path = data.id?.split("->")
+        console.log(path)
     }
     const addToSunburst = (tree: TreeNode,
         parents: Array<any>, 
@@ -92,7 +98,8 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) =>
     }
 
     for (let subplotNumber = 0; subplotNumber < sunburstAxes.length; subplotNumber++) {
-        const subtitle = sunburstAxes[subplotNumber][0].namePath[0]
+        console.log("Subplot number : ", subplotNumber)
+        const subtitle = sunburstAxes[subplotNumber][0].namePath[sunburstAxes[subplotNumber][0].namePath.length-1]
         const ids: Array<any> = [];
         const labels: Array<any> = [];
         const parents: Array<any> = [];
@@ -101,7 +108,7 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) =>
         const levels = data.axes[1].hierarchies.length
 
         const tree : TreeNode = {
-            name: title,
+            name: subtitle,
             value: 0,
             children: [],
             parent: "",
@@ -115,9 +122,11 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) =>
                 putInTree(tree, path, sunburstValues[rowIndex*sunburstAxes.length+subplotNumber].value)
         }
         )
+
         tree.children.forEach(node => {
             tree.value += node.value
         })
+
         addToSunburst(tree, parents, labels, values, ids)
         console.log(tree, parents, labels ,values, ids)
         const plot = 
@@ -138,7 +147,7 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState>((props) =>
             {subtitle}
         </div>
         <Plot
-        onHover={handleHover}
+        onClick={handleClick}
         data={
             [
                 {
