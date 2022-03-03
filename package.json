@@ -1,52 +1,55 @@
 {
-  "name": "cs-activeviam-plugins",
-  "version": "1.0.4",
-  "description": "Extra Activeviam plugins to install in ActiveUI",
-  "repository": "git@github.com:mohamedalibarka/activeui-starter.git",
-  "license": "MIT",
-  "author": "Pchol22 <pierre.chollet@student-cs.fr>",
-  "main": "./lib/cjs/modulePlugins.js",
-  "module": "./lib/esm/modulePlugins.js",
-  "types": "./lib/esm/modulePlugins.d.ts",
-  "files": [
-    "lib"
-  ],
-  "scripts": {
-    "start": "activeui-scripts start",
-    "build": "yarn build:clean && yarn build:esm && yarn build:cjs",
-    "build:clean": "rm -rf lib",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
-    "style": "yarn prettier . --write && yarn run eslint ./src/**/*.tsx",
-    "test": "yarn run jest"
-  },
-  "devDependencies": {
-    "@activeviam/activeui-scripts": "5.0.7",
-    "@activeviam/browserslist-config-activeui": "5.0.7",
-    "@activeviam/sandbox-clients": "5.0.7",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.3",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^14.0.4",
-    "@types/react": "^16.9.34",
-    "@types/react-plotly.js": "^2.5.0",
-    "jest": "^27.5.1",
-    "typescript": "^4.0.3"
-  },
-  "peerDependencies": {
-    "@activeviam/activeui-sdk": "5.0.7",
-    "react": "^17.0.0"
-  },
-  "dependencies": {
-    "@rehooks/component-size": "^1.0.3",
-    "antd": "4.12.2",
-    "immer": "^9.0.12",
-    "lodash": "^4.17.15",
-    "plotly.js": "^2.8.3",
-    "react-intl": "^5.24.2",
-    "react-plotly.js": "^2.5.1"
-  },
-  "browserslist": [
-    "extends @activeviam/browserslist-config-activeui"
-  ]
+    "name": "cs-activeviam-plugins",
+    "version": "1.0.4",
+    "description": "Extra Activeviam plugins to install in ActiveUI",
+    "repository": "git@github.com:mohamedalibarka/activeui-starter.git",
+    "license": "MIT",
+    "author": "Pchol22 <pierre.chollet@student-cs.fr>",
+    "main": "./lib/cjs/modulePlugins.js",
+    "module": "./lib/esm/modulePlugins.js",
+    "types": "./lib/esm/modulePlugins.d.ts",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "start": "activeui-scripts start",
+        "build": "yarn build:clean && yarn build:esm && yarn build:cjs",
+        "build:clean": "rm -rf lib",
+        "build:esm": "tsc",
+        "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+        "style": "yarn prettier . --write && yarn run eslint ./src/**/*.tsx",
+        "test": "yarn run jest"
+    },
+    "devDependencies": {
+        "@activeviam/activeui-scripts": "5.0.7",
+        "@activeviam/browserslist-config-activeui": "5.0.7",
+        "@activeviam/sandbox-clients": "5.0.7",
+        "@testing-library/jest-dom": "^5.16.2",
+        "@testing-library/react": "^12.1.3",
+        "@types/jest": "^27.4.1",
+        "@types/node": "^14.0.4",
+        "@types/react": "^16.9.34",
+        "@types/react-plotly.js": "^2.5.0",
+        "@typescript-eslint/eslint-plugin": "^5.13.0",
+        "@typescript-eslint/parser": "^5.13.0",
+        "eslint-plugin-react": "^7.29.2",
+        "jest": "^27.5.1",
+        "typescript": "^4.0.3"
+    },
+    "peerDependencies": {
+        "@activeviam/activeui-sdk": "5.0.7",
+        "react": "^17.0.0"
+    },
+    "dependencies": {
+        "@rehooks/component-size": "^1.0.3",
+        "antd": "4.12.2",
+        "immer": "^9.0.12",
+        "lodash": "^4.17.15",
+        "plotly.js": "^2.8.3",
+        "react-intl": "^5.24.2",
+        "react-plotly.js": "^2.5.1"
+    },
+    "browserslist": [
+        "extends @activeviam/browserslist-config-activeui"
+    ]
 }
