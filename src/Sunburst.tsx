@@ -1,68 +1,12 @@
-import React, { Children, FC, useRef } from "react";
+import React, {  useRef } from "react";
 import useComponentSize from "@rehooks/component-size";
-import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify, withQueryResult, CellSetSelection, axisIds, Member } from "@activeviam/activeui-sdk";
+import { DataVisualizationWidgetState, withQueryResult, CellSetSelection } from "@activeviam/activeui-sdk";
 import Plot from "react-plotly.js";
 import Spin from "antd/lib/spin";
-import path from "path";
-import { Divider } from "antd";
-import { PlotDatum } from "plotly.js";
+import { addToSunburst, putInTree, sunburstPointToCellSetSelection, TreeNode } from "./sunburst.helper";
 
-interface TreeNode  {
-    name: string;
-    value: number;
-    children: Array<TreeNode>;
-    parent: string,
-    path: string
-}
-interface ClickData extends PlotDatum {
-    id?: string
-}
 export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSelection>((props) => {
-    const putInTree = (tree: TreeNode, path : Array<string>, value: any) => {
-        const pathSplit = path[0].split("-")
-        const treeName = pathSplit[pathSplit.length-1]
-        if (path.length>1) {
-            var foundIndex = tree.children.findIndex(child =>
-                child.name == treeName
-            )
-            if (foundIndex == -1) {
-                foundIndex = tree.children.length
-                tree.children.push({
-                    name: treeName,
-                    value: 0,
-                    children: [],
-                    parent: tree.path,
-                    path: tree.path+"->"+path[0]
-                })
-            }
-            const newPath = path.slice(1)
-            tree.children[foundIndex].value += value
-            putInTree(tree.children[foundIndex], newPath, value)
-        } else {
-            tree.children.push({
-                name: treeName,
-                value: value,
-                children: [],
-                parent: tree.path,
-                path: tree.path+"->"+path[0]
-            })
-        }
-        return tree
 
-    };
-
-    const addToSunburst = (tree: TreeNode,
-        parents: Array<any>, 
-        labels: Array<any>, 
-        values: Array<any>,
-        ids: Array<any>
-        ) => {
-        parents.push(tree.parent);
-        labels.push(tree.name);
-        values.push(tree.value);
-        ids.push(tree.path);
-        tree.children.forEach(node => addToSunburst(node, parents, labels, values, ids));
-    }
     const geoLayoutRef = useRef<Plotly.Layout["geo"] | undefined>({});
     const container = useRef<HTMLDivElement>(null);
     var { height, width } = useComponentSize(container);
@@ -82,59 +26,8 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
     const { onSelectionChange } = props;
 
     const handleHover = (payload: Plotly.PlotMouseEvent) => {
-        
-
-        const selection = (payload.points[0] as ClickData).id?.split("->").slice(1);
-
-        if (!data || !onSelectionChange || !selection) {
-            return;
-        }
-
-        const rowsAxis = data.axes[1];
-
-        const matchingMembers = rowsAxis.positions.filter((members: Member[]) => 
-            selection.every((s, id) => members[id].captionPath.every((x, i) => x === s.split('-')[i]))
-        );
-
-        if (matchingMembers.length === 0) return;
-
-        const membersToFilter = matchingMembers[0];
-
-        const selectedCountries: CellSetSelection = {
-            axes: [
-            {
-                id: axisIds.rows,
-                // si on veut que la selection soit porte seulement sur l'axe principal (racine) qu'on survole
-                /*
-                positions: membersToFilter.map((m, i) => [{
-                    dimensionName: rowsAxis.hierarchies[i].dimension,
-                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
-                    ...m,
-                }]).filter((_,i) => i === 0),
-                */
-
-                // si on veut que la selection porte seulement sur l'axe qu'on survole
-                
-                positions: membersToFilter.map((m, i) => [{
-                    dimensionName: rowsAxis.hierarchies[i].dimension,
-                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
-                    ...m,
-                }]).filter((_,i) => i === selection.length - 1),
-                
-                // si on veut que la selection porte sur la combinaison de tous les axes parents + celui qu'on survole
-                
-                /*
-                positions: membersToFilter.map((m, i) => [{
-                    dimensionName: rowsAxis.hierarchies[i].dimension,
-                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
-                    ...m,
-                }]).filter((_,i) => i < selection.length)
-                */
-                
-            }
-            ]
-        };
-        onSelectionChange(selectedCountries);
+        const newSelection = sunburstPointToCellSetSelection(data, payload.points[0]);
+        if (newSelection && !!onSelectionChange) onSelectionChange(newSelection);
     };
 
     const sunburstAxes = data.axes[0].positions;
@@ -258,4 +151,4 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
             {plots}
                 
       </div>;
-})
+});

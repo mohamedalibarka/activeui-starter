@@ -179,8 +179,22 @@ pluginWidgetTreeTable.cellStyle = pluginCellStylePivotTable.key;
   },
 );
 pluginWidgetMap.contextMenuItems = [ "filter-on-countries" ];
+
+pluginWidgetMap.menuItems = [
+  pluginMenuItemRemoveWidget.key,
+  pluginMenuItemDuplicateWidget.key,
+  "save-as",
+];
+
 // pluginWidgetSunburst.contextMenuItems = [ "filter-sunburst" ];
 pluginWidgetSunburst.contextMenuItems = [ pluginMenuItemFilterOnSelection.key, pluginMenuItemRefreshQuery.key, ];
+
+pluginWidgetSunburst.menuItems = [
+  pluginMenuItemRemoveWidget.key,
+  pluginMenuItemDuplicateWidget.key,
+  "save-as",
+];
+
 pluginWidgetDrillthroughTable.menuItems = [
   pluginMenuItemRemoveWidget.key,
   pluginMenuItemDuplicateWidget.key,
