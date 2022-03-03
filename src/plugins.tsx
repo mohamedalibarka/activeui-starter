@@ -179,7 +179,8 @@ pluginWidgetTreeTable.cellStyle = pluginCellStylePivotTable.key;
   },
 );
 pluginWidgetMap.contextMenuItems = [ "filter-on-countries" ];
-pluginWidgetSunburst.contextMenuItems = [ "filter-sunburst" ];
+// pluginWidgetSunburst.contextMenuItems = [ "filter-sunburst" ];
+pluginWidgetSunburst.contextMenuItems = [ pluginMenuItemFilterOnSelection.key, pluginMenuItemRefreshQuery.key, ];
 pluginWidgetDrillthroughTable.menuItems = [
   pluginMenuItemRemoveWidget.key,
   pluginMenuItemDuplicateWidget.key,

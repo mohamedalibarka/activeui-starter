@@ -1,6 +1,6 @@
 import React, { Children, FC, useRef } from "react";
 import useComponentSize from "@rehooks/component-size";
-import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify, withQueryResult, CellSetSelection } from "@activeviam/activeui-sdk";
+import { WidgetPluginProps, useQueryResult, DataVisualizationWidgetState, stringify, withQueryResult, CellSetSelection, axisIds, Member } from "@activeviam/activeui-sdk";
 import Plot from "react-plotly.js";
 import Spin from "antd/lib/spin";
 import path from "path";
@@ -50,12 +50,7 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
         return tree
 
     };
-    const handleClick = (payload: Plotly.PlotMouseEvent) => {
-        const data : ClickData = payload.points[0]
-        console.log(data.id)
-        const path = data.id?.split("->")
-        console.log(path)
-    }
+
     const addToSunburst = (tree: TreeNode,
         parents: Array<any>, 
         labels: Array<any>, 
@@ -80,10 +75,68 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
         return <div>{error.stackTrace}</div>
     }
 
-    console.log("Sunburst",isLoading, data);
+    // console.log("Sunburst",isLoading, data);
     if (data.axes.length < 2) {
         return <Spin />
     }
+    const { onSelectionChange } = props;
+
+    const handleHover = (payload: Plotly.PlotMouseEvent) => {
+        
+
+        const selection = (payload.points[0] as ClickData).id?.split("->").slice(1);
+
+        if (!data || !onSelectionChange || !selection) {
+            return;
+        }
+
+        const rowsAxis = data.axes[1];
+
+        const matchingMembers = rowsAxis.positions.filter((members: Member[]) => 
+            selection.every((s, id) => members[id].captionPath.every((x, i) => x === s.split('-')[i]))
+        );
+
+        if (matchingMembers.length === 0) return;
+
+        const membersToFilter = matchingMembers[0];
+
+        const selectedCountries: CellSetSelection = {
+            axes: [
+            {
+                id: axisIds.rows,
+                // si on veut que la selection soit porte seulement sur l'axe principal (racine) qu'on survole
+                /*
+                positions: membersToFilter.map((m, i) => [{
+                    dimensionName: rowsAxis.hierarchies[i].dimension,
+                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
+                    ...m,
+                }]).filter((_,i) => i === 0),
+                */
+
+                // si on veut que la selection porte seulement sur l'axe qu'on survole
+                
+                positions: membersToFilter.map((m, i) => [{
+                    dimensionName: rowsAxis.hierarchies[i].dimension,
+                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
+                    ...m,
+                }]).filter((_,i) => i === selection.length - 1),
+                
+                // si on veut que la selection porte sur la combinaison de tous les axes parents + celui qu'on survole
+                
+                /*
+                positions: membersToFilter.map((m, i) => [{
+                    dimensionName: rowsAxis.hierarchies[i].dimension,
+                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
+                    ...m,
+                }]).filter((_,i) => i < selection.length)
+                */
+                
+            }
+            ]
+        };
+        onSelectionChange(selectedCountries);
+    };
+
     const sunburstAxes = data.axes[0].positions;
     const sunburstData = data.axes[1].positions;
     const sunburstValues = data.cells;
@@ -98,7 +151,7 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
     }
 
     for (let subplotNumber = 0; subplotNumber < sunburstAxes.length; subplotNumber++) {
-        console.log("Subplot number : ", subplotNumber)
+        // console.log("Subplot number : ", subplotNumber)
         const subtitle = sunburstAxes[subplotNumber][0].namePath[sunburstAxes[subplotNumber][0].namePath.length-1]
         const ids: Array<any> = [];
         const labels: Array<any> = [];
@@ -128,7 +181,7 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
         })
 
         addToSunburst(tree, parents, labels, values, ids)
-        console.log(tree, parents, labels ,values, ids)
+        //console.log(tree, parents, labels ,values, ids)
         const plot = 
         <div style={
             {
@@ -147,7 +200,8 @@ export const Sunburst = withQueryResult<DataVisualizationWidgetState, CellSetSel
             {subtitle}
         </div>
         <Plot
-        onClick={handleClick}
+        divId="my-div"
+        onHover={handleHover}
         data={
             [
                 {
