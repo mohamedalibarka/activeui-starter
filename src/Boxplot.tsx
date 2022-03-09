@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
-import {
-    DataVisualizationWidgetState,
-    withQueryResult,
-    CellSetSelection,
-} from '@activeviam/activeui-sdk';
+import { DataVisualizationWidgetState, withQueryResult,CellSetSelection } from '@activeviam/activeui-sdk';
 import Plot from 'react-plotly.js';
 import Spin from 'antd/lib/spin';
 import { PlotData } from 'plotly.js';
