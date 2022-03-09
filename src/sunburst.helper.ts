@@ -100,7 +100,7 @@ const putInTree = (tree: TreeNode, path: Array<string>, value: any) => {
     const pathSplit = path[0].split('-');
     const treeName = pathSplit[pathSplit.length - 1];
     if (path.length > 1) {
-        var foundIndex = tree.children.findIndex(
+        let foundIndex = tree.children.findIndex(
             (child) => child.name == treeName
         );
         if (foundIndex == -1) {
