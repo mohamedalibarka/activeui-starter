@@ -1,12 +1,11 @@
 import {
-    axisIds,
+    AxisId,
     CellSet,
     CellSetSelection,
     Member,
 } from '@activeviam/activeui-sdk';
-import { PlotDatum } from 'plotly.js';
 
-interface ClickData extends PlotDatum {
+export interface ClickData {
     id?: string;
 }
 
@@ -20,10 +19,11 @@ export interface TreeNode {
 
 const sunburstPointToCellSetSelection = (
     pluginData: CellSet,
-    point: PlotDatum
+    point: ClickData,
+    axisIds: { [key: string]: AxisId }
 ): CellSetSelection | undefined => {
-    const selection = (point as ClickData).id?.split('->').slice(1);
-
+    const selection = point.id?.split('->').slice(1);
+    console.log(pluginData);
     if (!pluginData || !selection) {
         return;
     }
@@ -31,8 +31,10 @@ const sunburstPointToCellSetSelection = (
     const rowsAxis = pluginData.axes[1];
 
     const matchingMembers = rowsAxis.positions.filter((members: Member[]) =>
-        selection.every((s, id) =>
-            members[id].captionPath.every((x, i) => x === s.split('-')[i])
+        selection.every(
+            (s, id) =>
+                members[id].captionPath.length === s.split('-').length &&
+                members[id].captionPath.every((x, i) => x === s.split('-')[i])
         )
     );
 
@@ -46,15 +48,15 @@ const sunburstPointToCellSetSelection = (
                 id: axisIds.rows,
                 // si on veut que la selection soit porte seulement sur l'axe principal (racine) qu'on survole
                 /*
-            positions: membersToFilter.map((m, i) => [{
-                dimensionName: rowsAxis.hierarchies[i].dimension,
-                hierarchyName: rowsAxis.hierarchies[i].hierarchy,
-                ...m,
-            }]).filter((_,i) => i === 0),
-            */
+                positions: membersToFilter.map((m, i) => [{
+                    dimensionName: rowsAxis.hierarchies[i].dimension,
+                    hierarchyName: rowsAxis.hierarchies[i].hierarchy,
+                    ...m,
+                }]).filter((_,i) => i === 0),
+                */
 
                 // si on veut que la selection porte seulement sur l'axe qu'on survole
-
+                /*
                 positions: membersToFilter
                     .map((m, i) => [
                         {
@@ -64,16 +66,17 @@ const sunburstPointToCellSetSelection = (
                         },
                     ])
                     .filter((_, i) => i === selection.length - 1),
-
+                */
                 // si on veut que la selection porte sur la combinaison de tous les axes parents + celui qu'on survole
-
-                /*
-            positions: membersToFilter.map((m, i) => [{
-                dimensionName: rowsAxis.hierarchies[i].dimension,
-                hierarchyName: rowsAxis.hierarchies[i].hierarchy,
-                ...m,
-            }]).filter((_,i) => i < selection.length)
-            */
+                positions: membersToFilter
+                    .map((m, i) => [
+                        {
+                            dimensionName: rowsAxis.hierarchies[i].dimension,
+                            hierarchyName: rowsAxis.hierarchies[i].hierarchy,
+                            ...m,
+                        },
+                    ])
+                    .filter((_, i) => i < selection.length),
             },
         ],
     };

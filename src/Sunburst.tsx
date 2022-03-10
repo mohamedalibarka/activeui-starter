@@ -4,11 +4,13 @@ import {
     DataVisualizationWidgetState,
     withQueryResult,
     CellSetSelection,
+    axisIds,
 } from '@activeviam/activeui-sdk';
 import Plot from 'react-plotly.js';
 import Spin from 'antd/lib/spin';
 import {
     addToSunburst,
+    ClickData,
     putInTree,
     sunburstPointToCellSetSelection,
     TreeNode,
@@ -36,10 +38,12 @@ export const Sunburst = withQueryResult<
     }
     const { onSelectionChange } = props;
 
-    const handleHover = (payload: Plotly.PlotMouseEvent) => {
+    const handleHover = (payload: { points: ClickData[] }) => {
+        console.log(payload.points[0].id);
         const newSelection = sunburstPointToCellSetSelection(
             data,
-            payload.points[0]
+            payload.points[0],
+            axisIds
         );
         if (newSelection && !!onSelectionChange)
             onSelectionChange(newSelection);
