@@ -1,6 +1,6 @@
 import _keyBy from 'lodash/keyBy';
 import { pluginWidgetMap } from './map/pluginWidgetMap';
-import { pluginWidgetSunburst } from './pluginWidgetSunburst';
+import { pluginWidgetSunburst } from './sunburst/pluginWidgetSunburst';
 import { pluginMenuItemFilterOnCountries } from './map/pluginMenuItemFilterOnCountries';
 import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
 import { pluginWidgetHeatmap } from './heatmap/pluginWidgetHeatmap';
