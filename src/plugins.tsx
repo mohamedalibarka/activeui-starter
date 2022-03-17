@@ -4,7 +4,7 @@ import { pluginWidgetSunburst } from './pluginWidgetSunburst';
 import { pluginMenuItemFilterOnCountries } from './pluginMenuItemFilterOnCountries';
 import { pluginMenuItemFilterSunburst } from './pluginMenuItemFilterSunburst';
 import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
-import { pluginWidgetHeatmap } from './pluginWidgetHeatmap';
+import { pluginWidgetHeatmap } from './heatmap/pluginWidgetHeatmap';
 import {
     CellPlugin,
     CellStylePlugin,
