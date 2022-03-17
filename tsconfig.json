@@ -15,7 +15,8 @@
         "skipLibCheck": true,
         "strict": true,
         "target": "es5",
-        "outDir": "lib/esm"
+        "outDir": "lib/esm",
+        "downlevelIteration": true
     },
     "include": ["src/**/*"],
     "exclude": [

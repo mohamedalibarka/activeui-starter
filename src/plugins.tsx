@@ -4,6 +4,7 @@ import { pluginWidgetSunburst } from './pluginWidgetSunburst';
 import { pluginMenuItemFilterOnCountries } from './pluginMenuItemFilterOnCountries';
 import { pluginMenuItemFilterSunburst } from './pluginMenuItemFilterSunburst';
 import { pluginWidgetBoxplot } from './pluginWidgetBoxplot';
+import { pluginWidgetHeatmap } from './pluginWidgetHeatmap';
 import {
     CellPlugin,
     CellStylePlugin,
@@ -115,6 +116,7 @@ const widgetPlugins: Array<WidgetPlugin<any, any>> = [
     pluginWidgetSunburst,
     pluginWidgetMap,
     pluginWidgetPivotTable,
+    pluginWidgetHeatmap,
 ];
 
 const plotlyWidgetPlugins = widgetPlugins.filter(({ key }) =>
@@ -193,6 +195,12 @@ pluginWidgetSunburst.contextMenuItems = [
 ];
 
 pluginWidgetSunburst.menuItems = [
+    pluginMenuItemRemoveWidget.key,
+    pluginMenuItemDuplicateWidget.key,
+    'save-as',
+];
+
+pluginWidgetHeatmap.menuItems = [
     pluginMenuItemRemoveWidget.key,
     pluginMenuItemDuplicateWidget.key,
     'save-as',
