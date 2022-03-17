@@ -1,6 +1,6 @@
 import { pluginWidgetMap } from './pluginWidgetMap';
 import { pluginWidgetSunburst } from './pluginWidgetSunburst';
-import { pluginWidgetBoxplot } from './pluginWidgetBoxplot';
+import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
 import { pluginWidgetHeatmap } from './pluginWidgetHeatmap';
 
 // Put newly created plugins here to add them to NPM library

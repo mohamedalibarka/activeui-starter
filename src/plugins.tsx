@@ -3,7 +3,7 @@ import { pluginWidgetMap } from './pluginWidgetMap';
 import { pluginWidgetSunburst } from './pluginWidgetSunburst';
 import { pluginMenuItemFilterOnCountries } from './pluginMenuItemFilterOnCountries';
 import { pluginMenuItemFilterSunburst } from './pluginMenuItemFilterSunburst';
-import { pluginWidgetBoxplot } from './pluginWidgetBoxplot';
+import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
 import { pluginWidgetHeatmap } from './pluginWidgetHeatmap';
 import {
     CellPlugin,
@@ -188,7 +188,6 @@ pluginWidgetMap.menuItems = [
     'save-as',
 ];
 
-// pluginWidgetSunburst.contextMenuItems = [ "filter-sunburst" ];
 pluginWidgetSunburst.contextMenuItems = [
     pluginMenuItemFilterOnSelection.key,
     pluginMenuItemRefreshQuery.key,
