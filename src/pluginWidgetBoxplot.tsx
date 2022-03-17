@@ -6,14 +6,14 @@ import {
     parse,
     CellSetSelection,
 } from '@activeviam/activeui-sdk';
-import { Sunburst } from './Sunburst';
+import { Boxplot } from './Boxplot';
 import { IconSunburst } from './IconSunburst';
-const widgetKey = 'sunburst';
-export const pluginWidgetSunburst: WidgetPlugin<
+const widgetKey = 'boxplot';
+export const pluginWidgetBoxplot: WidgetPlugin<
     DataVisualizationWidgetState,
     CellSetSelection
 > = {
-    Component: Sunburst,
+    Component: Boxplot,
     category: 'dataVisualization',
     contentEditor: DataVisualizationContentEditor,
     filtersEditor: FiltersEditor,
@@ -25,10 +25,7 @@ export const pluginWidgetSunburst: WidgetPlugin<
         },
         rows: {
             role: 'primaryOrdinal',
-        },
-        horizontalSubplots: {
-            role: 'subplot',
-            maxNumberOfFields: 1,
+            maxNumberOfFields: 2,
         },
     },
     initialState: {
@@ -75,14 +72,13 @@ export const pluginWidgetSunburst: WidgetPlugin<
                     dimensionName: 'Green-growth',
                 },
             ],
-            horizontalSubplots: [],
         },
     },
     key: widgetKey,
     translations: {
         'en-US': {
-            key: 'Sunburst',
-            defaultName: 'New Sunburst',
+            key: 'Boxplot',
+            defaultName: 'New Boxplot',
         },
     },
 };

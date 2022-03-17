@@ -6,18 +6,18 @@ import {
     parse,
     CellSetSelection,
 } from '@activeviam/activeui-sdk';
-import { Sunburst } from './Sunburst';
-import { IconSunburst } from './IconSunburst';
-const widgetKey = 'sunburst';
-export const pluginWidgetSunburst: WidgetPlugin<
+import { Heatmap } from './Heatmap';
+import { IconHeatmap } from './IconHeatmap';
+const widgetKey = 'heatmap';
+export const pluginWidgetHeatmap: WidgetPlugin<
     DataVisualizationWidgetState,
     CellSetSelection
 > = {
-    Component: Sunburst,
+    Component: Heatmap,
     category: 'dataVisualization',
     contentEditor: DataVisualizationContentEditor,
     filtersEditor: FiltersEditor,
-    Icon: IconSunburst,
+    Icon: IconHeatmap,
     attributes: {
         values: {
             role: 'primaryNumeric',
@@ -25,10 +25,7 @@ export const pluginWidgetSunburst: WidgetPlugin<
         },
         rows: {
             role: 'primaryOrdinal',
-        },
-        horizontalSubplots: {
-            role: 'subplot',
-            maxNumberOfFields: 1,
+            maxNumberOfFields: 2,
         },
     },
     initialState: {
@@ -75,14 +72,13 @@ export const pluginWidgetSunburst: WidgetPlugin<
                     dimensionName: 'Green-growth',
                 },
             ],
-            horizontalSubplots: [],
         },
     },
     key: widgetKey,
     translations: {
         'en-US': {
-            key: 'Sunburst',
-            defaultName: 'New Sunburst',
+            key: 'Heatmap',
+            defaultName: 'New Heatmap',
         },
     },
 };
