@@ -3,7 +3,6 @@ import {
     MdxSelect,
     parse,
     FiltersEditor,
-    CellSetSelection,
 } from '@activeviam/activeui-sdk';
 import { IconWorld } from './IconWorld';
 import { Map } from './Map';

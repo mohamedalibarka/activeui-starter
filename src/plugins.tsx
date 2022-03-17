@@ -1,8 +1,7 @@
 import _keyBy from 'lodash/keyBy';
-import { pluginWidgetMap } from './pluginWidgetMap';
+import { pluginWidgetMap } from './map/pluginWidgetMap';
 import { pluginWidgetSunburst } from './pluginWidgetSunburst';
-import { pluginMenuItemFilterOnCountries } from './pluginMenuItemFilterOnCountries';
-import { pluginMenuItemFilterSunburst } from './pluginMenuItemFilterSunburst';
+import { pluginMenuItemFilterOnCountries } from './map/pluginMenuItemFilterOnCountries';
 import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
 import { pluginWidgetHeatmap } from './heatmap/pluginWidgetHeatmap';
 import {
@@ -80,7 +79,6 @@ const cellStylePlugins: Array<CellStylePlugin<any>> = [
 ];
 
 const menuItemPlugins: Array<MenuItemPlugin<any, any>> = [
-    pluginMenuItemFilterSunburst,
     pluginMenuItemFilterOnCountries,
     pluginMenuItemDuplicateWidget,
     pluginMenuItemFullScreen,

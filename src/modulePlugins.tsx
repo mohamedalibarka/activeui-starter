@@ -1,4 +1,4 @@
-import { pluginWidgetMap } from './pluginWidgetMap';
+import { pluginWidgetMap } from './map/pluginWidgetMap';
 import { pluginWidgetSunburst } from './pluginWidgetSunburst';
 import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
 import { pluginWidgetHeatmap } from './heatmap/pluginWidgetHeatmap';
