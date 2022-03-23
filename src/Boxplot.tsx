@@ -4,16 +4,10 @@ import {
     DataVisualizationWidgetState,
     withQueryResult,
     CellSetSelection,
-    Member,
-    CellSet,
 } from '@activeviam/activeui-sdk';
 import Plot from 'react-plotly.js';
 import Spin from 'antd/lib/spin';
-import { PlotData, PlotMouseEvent } from 'plotly.js';
-import {
-    boxplotPointToCellSetSelection,
-    buildBoxplotData,
-} from './boxplot.helper';
+import { buildBoxplotData } from './boxplot.helper';
 export const Boxplot = withQueryResult<
     DataVisualizationWidgetState,
     CellSetSelection
@@ -32,13 +26,6 @@ export const Boxplot = withQueryResult<
     if (data.axes.length < 2) {
         return <Spin />;
     }
-    const { onSelectionChange } = props;
-
-    const handleHover = (event: Readonly<PlotMouseEvent>) => {
-        const newSelection = boxplotPointToCellSetSelection(data);
-        if (newSelection && !!onSelectionChange)
-            onSelectionChange(newSelection);
-    };
     console.log(data);
     const traces = buildBoxplotData(data);
     console.log(traces);
@@ -53,7 +40,6 @@ export const Boxplot = withQueryResult<
         >
             <Plot
                 data={traces}
-                onHover={handleHover}
                 layout={{
                     geo: geoLayoutRef.current,
                     height,
