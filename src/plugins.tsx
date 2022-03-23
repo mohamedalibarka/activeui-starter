@@ -200,6 +200,17 @@ pluginWidgetSunburst.menuItems = [
     'save-as',
 ];
 
+pluginWidgetBoxplot.contextMenuItems = [
+    pluginMenuItemFilterOnSelection.key,
+    pluginMenuItemRefreshQuery.key,
+];
+
+pluginWidgetBoxplot.menuItems = [
+    pluginMenuItemRemoveWidget.key,
+    pluginMenuItemDuplicateWidget.key,
+    'save-as',
+];
+
 pluginWidgetHeatmap.menuItems = [
     pluginMenuItemRemoveWidget.key,
     pluginMenuItemDuplicateWidget.key,

@@ -7,7 +7,7 @@ import {
     CellSetSelection,
 } from '@activeviam/activeui-sdk';
 import { Boxplot } from './Boxplot';
-import { IconSunburst } from './IconSunburst';
+import { IconBoxplot } from './IconBoxplot';
 const widgetKey = 'boxplot';
 export const pluginWidgetBoxplot: WidgetPlugin<
     DataVisualizationWidgetState,
@@ -17,7 +17,7 @@ export const pluginWidgetBoxplot: WidgetPlugin<
     category: 'dataVisualization',
     contentEditor: DataVisualizationContentEditor,
     filtersEditor: FiltersEditor,
-    Icon: IconSunburst,
+    Icon: IconBoxplot,
     attributes: {
         values: {
             role: 'primaryNumeric',

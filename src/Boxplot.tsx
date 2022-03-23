@@ -9,8 +9,11 @@ import {
 } from '@activeviam/activeui-sdk';
 import Plot from 'react-plotly.js';
 import Spin from 'antd/lib/spin';
-import { PlotData } from 'plotly.js';
-import { buildBoxplotData } from './boxplot.helper';
+import { PlotData, PlotMouseEvent } from 'plotly.js';
+import {
+    boxplotPointToCellSetSelection,
+    buildBoxplotData,
+} from './boxplot.helper';
 export const Boxplot = withQueryResult<
     DataVisualizationWidgetState,
     CellSetSelection
@@ -29,6 +32,13 @@ export const Boxplot = withQueryResult<
     if (data.axes.length < 2) {
         return <Spin />;
     }
+    const { onSelectionChange } = props;
+
+    const handleHover = (event: Readonly<PlotMouseEvent>) => {
+        const newSelection = boxplotPointToCellSetSelection(data);
+        if (newSelection && !!onSelectionChange)
+            onSelectionChange(newSelection);
+    };
     console.log(data);
     const traces = buildBoxplotData(data);
     console.log(traces);
@@ -38,11 +48,12 @@ export const Boxplot = withQueryResult<
             tabIndex={0}
             style={{
                 ...props.style,
-                height: '100%',
+                height: '95%',
             }}
         >
             <Plot
                 data={traces}
+                onHover={handleHover}
                 layout={{
                     geo: geoLayoutRef.current,
                     height,

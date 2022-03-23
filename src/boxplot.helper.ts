@@ -1,4 +1,9 @@
-import { CellSet } from '@activeviam/activeui-sdk';
+import {
+    axisIds,
+    CellSet,
+    CellSetSelection,
+    Member,
+} from '@activeviam/activeui-sdk';
 import { PlotData } from 'plotly.js';
 
 const buildBoxplotData = (data: CellSet) => {
@@ -24,6 +29,11 @@ const buildBoxplotData = (data: CellSet) => {
             last = position[0].captionPath[position[0].captionPath.length - 1];
             l = [boxplotValues[rowIndex].value];
         }
+    });
+    traces.push({
+        y: l,
+        type: 'box',
+        name: last,
     });
     return traces;
 };

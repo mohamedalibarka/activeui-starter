@@ -168,7 +168,7 @@ export const Sunburst = withQueryResult<
             tabIndex={0}
             style={{
                 ...props.style,
-                height: '100%',
+                height: '95%',
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'space-evenly',
