@@ -1,10 +1,9 @@
 import _keyBy from 'lodash/keyBy';
-import { pluginWidgetMap } from './pluginWidgetMap';
-import { pluginWidgetSunburst } from './pluginWidgetSunburst';
-import { pluginMenuItemFilterOnCountries } from './pluginMenuItemFilterOnCountries';
-import { pluginMenuItemFilterSunburst } from './pluginMenuItemFilterSunburst';
-import { pluginWidgetBoxplot } from './pluginWidgetBoxplot';
-import { pluginWidgetHeatmap } from './pluginWidgetHeatmap';
+import { pluginWidgetMap } from './map/pluginWidgetMap';
+import { pluginWidgetSunburst } from './sunburst/pluginWidgetSunburst';
+import { pluginMenuItemFilterOnCountries } from './map/pluginMenuItemFilterOnCountries';
+import { pluginWidgetBoxplot } from './boxplot/pluginWidgetBoxplot';
+import { pluginWidgetHeatmap } from './heatmap/pluginWidgetHeatmap';
 import {
     CellPlugin,
     CellStylePlugin,
@@ -80,7 +79,6 @@ const cellStylePlugins: Array<CellStylePlugin<any>> = [
 ];
 
 const menuItemPlugins: Array<MenuItemPlugin<any, any>> = [
-    pluginMenuItemFilterSunburst,
     pluginMenuItemFilterOnCountries,
     pluginMenuItemDuplicateWidget,
     pluginMenuItemFullScreen,
@@ -188,7 +186,6 @@ pluginWidgetMap.menuItems = [
     'save-as',
 ];
 
-// pluginWidgetSunburst.contextMenuItems = [ "filter-sunburst" ];
 pluginWidgetSunburst.contextMenuItems = [
     pluginMenuItemFilterOnSelection.key,
     pluginMenuItemRefreshQuery.key,

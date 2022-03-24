@@ -1,8 +1,5 @@
 import {
-    axisIds,
     CellSet,
-    CellSetSelection,
-    Member,
 } from '@activeviam/activeui-sdk';
 import { PlotData } from 'plotly.js';
 

@@ -1,6 +1,6 @@
 import { CellSet } from '@activeviam/activeui-sdk';
 import { PlotData } from 'plotly.js';
-import { buildBoxplotData } from '../src/boxplot.helper';
+import { buildBoxplotData } from '../src/boxplot/boxplot.helper';
 
 const testData: CellSet = {
     epoch: 4,

@@ -1,8 +1,5 @@
 import React from 'react';
 
-/**
- * Large icon of the earth, usable to represent the map in the widgets ribbon.
- */
 export const IconBoxplot = () => (
     <svg height="30" width="40" viewBox="0 0 100 100">
         <path
