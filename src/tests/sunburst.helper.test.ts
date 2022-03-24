@@ -6,7 +6,7 @@ import {
 import {
     ClickData,
     sunburstPointToCellSetSelection,
-} from '../src/sunburst/sunburst.helper';
+} from '../sunburst/sunburst.helper';
 import { CellSetSelection } from '@activeviam/activeui-sdk';
 
 describe('PluginSunburst Helper tests', () => {

@@ -23,7 +23,6 @@ const sunburstPointToCellSetSelection = (
     axisIds: { [key: string]: AxisId }
 ): CellSetSelection | undefined => {
     const selection = point.id?.split('->').slice(1);
-    console.log(pluginData);
     if (!pluginData || !selection) {
         return;
     }

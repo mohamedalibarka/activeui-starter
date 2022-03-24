@@ -1,5 +1,5 @@
 import { continentYearCellSet } from './testData';
-import { generateHeatmapData } from '../src/heatmap/heatmap.helper';
+import { generateHeatmapData } from '../heatmap/heatmap.helper';
 
 describe('PluginSunburst Helper tests', () => {
     describe('CellSet to HeatmapData', () => {
