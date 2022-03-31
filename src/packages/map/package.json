@@ -1,6 +1,6 @@
 {
   "name": "@cs-activeviam-plugins/map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "author": "",
   "homepage": "",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@cs-activeviam-plugins/utils": "^1.0.0"
+    "@cs-activeviam-plugins/utils": "^1.0.1"
   },
   "scripts": {
     "tsc": "tsc",
