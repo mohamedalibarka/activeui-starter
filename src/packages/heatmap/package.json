@@ -1,6 +1,6 @@
 {
   "name": "@cs-activeviam-plugins/heatmap",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "homepage": "",
@@ -11,7 +11,9 @@
     "lib": "lib",
     "test": "__tests__"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "publishConfig": {
     "access": "public"
   },

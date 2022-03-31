@@ -1,6 +1,6 @@
 {
   "name": "@cs-activeviam-plugins/starter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "homepage": "",
@@ -11,16 +11,18 @@
     "lib": "lib",
     "test": "__tests__"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@cs-activeviam-plugins/map": "0.0.0",
-    "@cs-activeviam-plugins/heatmap": "0.0.0",
-    "@cs-activeviam-plugins/sunburst": "0.0.0",
-    "@cs-activeviam-plugins/boxplot": "0.0.0",
-    "@cs-activeviam-plugins/mapfilteroncountries": "0.0.0"
+    "@cs-activeviam-plugins/boxplot": "^1.0.0",
+    "@cs-activeviam-plugins/heatmap": "^1.0.0",
+    "@cs-activeviam-plugins/map": "^1.0.0",
+    "@cs-activeviam-plugins/mapfilteroncountries": "^1.0.0",
+    "@cs-activeviam-plugins/sunburst": "^1.0.0"
   },
   "scripts": {
     "tsc": "tsc",
