@@ -1,6 +1,6 @@
 {
   "name": "@activeui-starter/starter",
-  "version": "1.1.3",
+  "version": "2.0.0",
   "description": "",
   "author": "",
   "homepage": "",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@activeui-starter/boxplot": "^1.1.3",
-    "@activeui-starter/heatmap": "^1.1.2",
-    "@activeui-starter/map": "^1.1.1",
-    "@activeui-starter/mapfilteroncountries": "^1.1.0",
-    "@activeui-starter/sunburst": "^1.1.3"
+    "@activeui-starter/boxplot": "^2.0.0",
+    "@activeui-starter/heatmap": "^2.0.0",
+    "@activeui-starter/map": "^2.0.0",
+    "@activeui-starter/mapfilteroncountries": "^2.0.0",
+    "@activeui-starter/sunburst": "^2.0.0"
   },
   "scripts": {
     "tsc": "tsc",
