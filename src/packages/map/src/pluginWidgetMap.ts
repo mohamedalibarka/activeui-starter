@@ -19,12 +19,9 @@ export const pluginWidgetMap: WidgetPlugin<MapWidgetState, CountriesSelection> =
         initialState: {
             widgetKey,
             query: {
-                mdx: parse<MdxSelect>(`SELECT
-                    [Measures].[Real GDP per capita (USD).MEAN] ON COLUMNS,
-                   [Countries].[Country].[Country_Name].Members ON ROWS
-                FROM [Green-growth]`),
+                mdx: parse<MdxSelect>(``),
             },
-            filters: [parse('[Green-growth].[Year].[2019]')],
+            filters: [],
             serverKey: 'my-server',
         },
         key: widgetKey,
