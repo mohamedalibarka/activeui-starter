@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import useComponentSize from '@rehooks/component-size';
 import {
     DataVisualizationWidgetState,
@@ -16,10 +16,8 @@ import {
     TreeNode,
 } from './sunburst.helper';
 
-export const Sunburst = withQueryResult<
-    DataVisualizationWidgetState,
-    CellSetSelection
->((props) => {
+// TODO mettre les bons props
+const BaseSunburst: FC = (props) => {
     const geoLayoutRef = useRef<Plotly.Layout['geo'] | undefined>({});
     const container = useRef<HTMLDivElement>(null);
     let { height, width } = useComponentSize(container);
@@ -177,4 +175,9 @@ export const Sunburst = withQueryResult<
             {plots}
         </div>
     );
-});
+};
+
+export const Sunburst = withQueryResult<
+    DataVisualizationWidgetState,
+    CellSetSelection
+>(BaseSunburst);
