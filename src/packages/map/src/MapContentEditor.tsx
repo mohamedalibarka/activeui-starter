@@ -12,7 +12,7 @@ import {
     addMeasure,
     //stringify,
 } from '@activeviam/activeui-sdk';
-import { MapWidgetState } from '@cs-activeviam-plugins/utils';
+import { MapWidgetState } from '@activeui-starter/utils';
 
 export const MapContentEditor: FC<EditorProps<MapWidgetState>> = (props) => {
     const { formatMessage } = useIntl();

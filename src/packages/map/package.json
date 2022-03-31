@@ -1,5 +1,5 @@
 {
-  "name": "@cs-activeviam-plugins/map",
+  "name": "@activeui-starter/map",
   "version": "1.0.1",
   "description": "",
   "author": "",
@@ -18,10 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@cs-activeviam-plugins/utils": "^1.0.1"
+    "@activeui-starter/utils": "^1.0.1"
   },
   "scripts": {
     "tsc": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
-  }
+  },
+  "gitHead": "e69967fdfd8fc82c38a8acca6a2772a0ef79e272"
 }

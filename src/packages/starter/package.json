@@ -1,5 +1,5 @@
 {
-  "name": "@cs-activeviam-plugins/starter",
+  "name": "@activeui-starter/starter",
   "version": "1.0.1",
   "description": "",
   "author": "",
@@ -18,14 +18,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@cs-activeviam-plugins/boxplot": "^1.0.1",
-    "@cs-activeviam-plugins/heatmap": "^1.0.1",
-    "@cs-activeviam-plugins/map": "^1.0.1",
-    "@cs-activeviam-plugins/mapfilteroncountries": "^1.0.1",
-    "@cs-activeviam-plugins/sunburst": "^1.0.1"
+    "@activeui-starter/boxplot": "^1.0.1",
+    "@activeui-starter/heatmap": "^1.0.1",
+    "@activeui-starter/map": "^1.0.1",
+    "@activeui-starter/mapfilteroncountries": "^1.0.1",
+    "@activeui-starter/sunburst": "^1.0.1"
   },
   "scripts": {
     "tsc": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
-  }
+  },
+  "gitHead": "e69967fdfd8fc82c38a8acca6a2772a0ef79e272"
 }
