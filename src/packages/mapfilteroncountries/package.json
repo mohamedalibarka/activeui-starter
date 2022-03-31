@@ -1,6 +1,6 @@
 {
   "name": "@activeui-starter/mapfilteroncountries",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "author": "",
   "homepage": "",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@activeui-starter/utils": "^1.1.0"
+    "@activeui-starter/utils": "^1.1.1"
   },
   "scripts": {
     "tsc": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "gitHead": "e69967fdfd8fc82c38a8acca6a2772a0ef79e272"
+  "gitHead": "490ddec00aa04a26b4b1801acdc1558395928662"
 }
