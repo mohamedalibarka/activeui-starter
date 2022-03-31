@@ -18,10 +18,7 @@
         "outDir": "lib/esm",
         "downlevelIteration": true
     },
-    "include": ["src/**/*"],
     "exclude": [
-        "src/index.tsx",
-        "src/plugins.tsx",
         "build",
         "lib",
         "node_modules"

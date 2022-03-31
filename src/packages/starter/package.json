@@ -1,0 +1,29 @@
+{
+  "name": "@cs-activeviam-plugins/starter",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": ["lib"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@cs-activeviam-plugins/map": "0.0.0",
+    "@cs-activeviam-plugins/heatmap": "0.0.0",
+    "@cs-activeviam-plugins/sunburst": "0.0.0",
+    "@cs-activeviam-plugins/boxplot": "0.0.0",
+    "@cs-activeviam-plugins/mapfilteroncountries": "0.0.0"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

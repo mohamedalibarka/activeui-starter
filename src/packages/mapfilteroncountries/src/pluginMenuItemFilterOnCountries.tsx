@@ -12,7 +12,7 @@ import {
 import React, { FC } from 'react';
 import Menu from 'antd/lib/menu';
 import { useIntl } from 'react-intl';
-import { MapWidgetState, CountriesSelection } from './map.types';
+import { MapWidgetState, CountriesSelection } from '@cs-activeviam-plugins/utils';
 import { MenuItemProps as AntMenuItemProps } from 'antd/lib/menu/MenuItem';
 import { produce } from 'immer';
 

@@ -1,0 +1,25 @@
+{
+  "name": "@cs-activeviam-plugins/map",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/pluginWidgetMap.js",
+  "typings": "lib/pluginWidgetMap.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": ["lib"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@cs-activeviam-plugins/utils": "0.0.0"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

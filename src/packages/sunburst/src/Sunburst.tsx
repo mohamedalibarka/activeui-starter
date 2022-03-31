@@ -126,6 +126,8 @@ export const Sunburst = withQueryResult<
                 </div>
                 <Plot
                     divId="my-div"
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     onHover={handleHover}
                     data={[
                         {
