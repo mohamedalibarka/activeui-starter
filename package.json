@@ -6,10 +6,12 @@
     "license": "MIT",
     "author": "Pchol22 <pierre.chollet@student-cs.fr>",
     "scripts": {
-        "build": "yarn run lerna run tsc",
+        "lerna:build": "yarn run lerna run tsc",
         "style": "yarn prettier . --write && yarn run eslint ./src/packages/**/*.tsx",
         "test": "yarn run jest",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "lerna:bootstrap": "yarn run lerna bootstrap",
+        "lerna:publish": "yarn run lerna publish"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.16.11",
