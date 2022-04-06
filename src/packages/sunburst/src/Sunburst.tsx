@@ -32,14 +32,12 @@ export const Sunburst = withQueryResult<
         return <div>{error.stackTrace}</div>;
     }
 
-    // console.log("Sunburst",isLoading, data);
     if (data.axes.length < 2) {
         return <Spin />;
     }
     const { onSelectionChange } = props;
 
     const handleHover = (payload: { points: ClickData[] }) => {
-        console.log(payload.points[0].id);
         const newSelection = sunburstPointToCellSetSelection(
             data,
             payload.points[0],
@@ -67,7 +65,6 @@ export const Sunburst = withQueryResult<
         subplotNumber < sunburstAxes.length;
         subplotNumber++
     ) {
-        // console.log("Subplot number : ", subplotNumber)
         const subtitle =
             sunburstAxes[subplotNumber][0].namePath[
                 sunburstAxes[subplotNumber][0].namePath.length - 1
@@ -104,7 +101,6 @@ export const Sunburst = withQueryResult<
         });
 
         addToSunburst(tree, parents, labels, values, ids);
-        //console.log(tree, parents, labels ,values, ids)
         const plot = (
             <div
                 style={{

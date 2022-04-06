@@ -14,7 +14,6 @@ export const Map = withQueryResult<MapWidgetState, CountriesSelection>(
             data?: CellSet
         ): [string[], number[]] => {
             if (!data) {
-                console.log(props);
                 return [[], []];
             }
 
@@ -36,7 +35,6 @@ export const Map = withQueryResult<MapWidgetState, CountriesSelection>(
                 valuesForSelectedYear,
             ];
         };
-        console.log('test', props.widgetState);
         const [selectedIndices, setSelectedIndices] = useState<
             number[] | undefined
         >();
@@ -44,7 +42,6 @@ export const Map = withQueryResult<MapWidgetState, CountriesSelection>(
 
         // countries and values only depend on `data`.
         const [countries, values] = getCountriesAndValues(data);
-        console.log(isLoading, data, countries, values);
 
         const { onSelectionChange } = props;
 
@@ -61,8 +58,6 @@ export const Map = withQueryResult<MapWidgetState, CountriesSelection>(
                 const member = position[0];
                 return member.namePath;
             });
-            //console.log(selectedIndices);
-            //console.log(selectedCountries);
             onSelectionChange(selectedCountries);
         }, [data, onSelectionChange, selectedIndices]);
 

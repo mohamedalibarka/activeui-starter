@@ -34,7 +34,6 @@ export const MapContentEditor: FC<EditorProps<MapWidgetState>> = (props) => {
     const handleMeasureClicked = (
         measure: Measure & { isDisabled: boolean }
     ) => {
-        //console.log(`We want to switch to ${measure.name}!`)
         //   const mdx = props.widgetState.mdx;
         //   const newMdx = mdx.replace(
         //       /\[Measures\]\.\[.*\]/,

@@ -26,9 +26,7 @@ export const Boxplot = withQueryResult<
     if (data.axes.length < 2) {
         return <Spin />;
     }
-    console.log(data);
     const traces = buildBoxplotData(data);
-    console.log(traces);
     return (
         <div
             ref={container}
