@@ -19,7 +19,7 @@ import {
     pluginCellTreeTable,
     pluginMenuItemCopyQuery,
     pluginMenuItemDuplicateWidget,
-    pluginMenuItemExportToCsv,
+    pluginMenuItemExportToCsv, 
     pluginMenuItemExportDrillthroughToCsv,
     pluginMenuItemFilterOnEverythingButSelection,
     pluginMenuItemFilterOnSelection,

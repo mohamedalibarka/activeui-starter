@@ -4,10 +4,6 @@ window.env = {
     // WARNING: Changing the keys of activePivotServers will break previously saved widgets and dashboards.
     // If you must do it, then you also need to update each one's serverKey attribute on your content server.
     activePivotServers: {
-        'my-server': {
-            url: 'https://activeui-tutorial-server.activeviam.com:9090',
-            version: '5.10.0',
-        },
         'Ranch 5.10': {
             url: 'https://activepivot-ranch.activeviam.com:5100',
             version: '5.10.0',
