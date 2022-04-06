@@ -1,6 +1,6 @@
 {
   "name": "@activeui-starter/map",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "author": "",
   "homepage": "",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@activeui-starter/utils": "^2.0.0"
+    "@activeui-starter/utils": "^2.0.1"
   },
   "scripts": {
     "tsc": "tsc",
