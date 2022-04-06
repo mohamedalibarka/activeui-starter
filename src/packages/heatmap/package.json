@@ -1,0 +1,25 @@
+{
+  "name": "@activeui-starter/heatmap",
+  "version": "2.0.0",
+  "description": "",
+  "author": "",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/pluginWidgetHeatmap.js",
+  "typings": "lib/pluginWidgetHeatmap.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "gitHead": "490ddec00aa04a26b4b1801acdc1558395928662"
+}

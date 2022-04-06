@@ -3,7 +3,7 @@ import { withQueryResult, CellSet } from '@activeviam/activeui-sdk';
 import Spin from 'antd/lib/spin';
 import Plot from 'react-plotly.js';
 import useComponentSize from '@rehooks/component-size';
-import { MapWidgetState, CountriesSelection } from './map.types';
+import { MapWidgetState, CountriesSelection } from '@activeui-starter/utils';
 
 export const Map = withQueryResult<MapWidgetState, CountriesSelection>(
     (props) => {

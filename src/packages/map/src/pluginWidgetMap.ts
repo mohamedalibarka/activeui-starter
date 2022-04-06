@@ -7,7 +7,7 @@ import {
 import { IconWorld } from './IconWorld';
 import { Map } from './Map';
 import { MapContentEditor } from './MapContentEditor';
-import { MapWidgetState, CountriesSelection } from './map.types';
+import { MapWidgetState, CountriesSelection } from '@activeui-starter/utils';
 
 const widgetKey = 'map';
 export const pluginWidgetMap: WidgetPlugin<MapWidgetState, CountriesSelection> =

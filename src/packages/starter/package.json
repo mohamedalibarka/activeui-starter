@@ -1,0 +1,32 @@
+{
+  "name": "@activeui-starter/starter",
+  "version": "2.0.0",
+  "description": "",
+  "author": "",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@activeui-starter/boxplot": "^2.0.0",
+    "@activeui-starter/heatmap": "^2.0.0",
+    "@activeui-starter/map": "^2.0.0",
+    "@activeui-starter/mapfilteroncountries": "^2.0.0",
+    "@activeui-starter/sunburst": "^2.0.0"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "gitHead": "490ddec00aa04a26b4b1801acdc1558395928662"
+}
