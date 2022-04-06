@@ -1,9 +1,9 @@
 import _keyBy from 'lodash/keyBy';
-import { pluginWidgetMap } from '@activeui-starter/lib';
-import { pluginWidgetSunburst } from '@activeui-starter/lib';
-import { pluginMenuItemFilterOnCountries } from '@activeui-starter/lib';
-import { pluginWidgetBoxplot } from '@activeui-starter/lib';
-import { pluginWidgetHeatmap } from '@activeui-starter/lib';
+import { pluginWidgetMap } from './packages/map';
+import { pluginWidgetSunburst } from './packages/sunburst';
+import { pluginMenuItemFilterOnCountries } from './packages/mapfilteroncountries';
+import { pluginWidgetBoxplot } from './packages/boxplot';
+import { pluginWidgetHeatmap } from './packages/heatmap';
 import {
     CellPlugin,
     CellStylePlugin,
