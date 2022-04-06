@@ -1,6 +1,4 @@
-import {
-    CellSet,
-} from '@activeviam/activeui-sdk';
+import { CellSet } from '@activeviam/activeui-sdk';
 import { PlotData } from 'plotly.js';
 
 const buildBoxplotData = (data: CellSet) => {
@@ -10,7 +8,7 @@ const buildBoxplotData = (data: CellSet) => {
 
     let last: string =
         boxplotData[0][0].captionPath[boxplotData[0][0].captionPath.length - 1];
-    const traces: Array<Partial<PlotData>> = [];
+    let traces: Array<Partial<PlotData>> = [];
     let l: Array<any> = [];
     boxplotData.map((position, rowIndex) => {
         if (
@@ -32,6 +30,8 @@ const buildBoxplotData = (data: CellSet) => {
         type: 'box',
         name: last,
     });
+    traces = traces.filter((trace) => trace.name != 'AllMember');
+
     return traces;
 };
 

@@ -39,14 +39,20 @@ export const Boxplot = withQueryResult<
             <Plot
                 data={traces}
                 layout={{
+                    yaxis: {
+                        title: data.axes[1].hierarchies[1]?.hierarchy,
+                    },
+                    xaxis: {
+                        title: data.axes[1].hierarchies[0].hierarchy,
+                    },
                     geo: geoLayoutRef.current,
                     height,
                     width,
                     margin: {
-                        l: 0,
-                        r: 0,
-                        b: 0,
-                        t: 0,
+                        l: 50,
+                        r: 50,
+                        b: 50,
+                        t: 50,
                     },
                 }}
             ></Plot>

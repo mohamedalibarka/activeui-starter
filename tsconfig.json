@@ -18,10 +18,6 @@
         "outDir": "lib/esm",
         "downlevelIteration": true
     },
-    "exclude": [
-        "build",
-        "lib",
-        "node_modules"
-    ],
+    "exclude": ["build", "lib", "node_modules"],
     "references": []
 }

@@ -83,17 +83,30 @@ export const Sunburst = withQueryResult<
             parent: '',
             path: '',
         };
+
         sunburstData.map((position, rowIndex) => {
-            const path: Array<string> = [];
+            let skip = false;
             for (let i = 0; i < levels; i++) {
-                path.push(position[i].captionPath.join('-'));
+                if (
+                    position[i].captionPath.length == 1 &&
+                    position[i].captionPath[0] == 'AllMember'
+                ) {
+                    skip = true;
+                }
             }
-            putInTree(
-                tree,
-                path,
-                sunburstValues[rowIndex * sunburstAxes.length + subplotNumber]
-                    .value
-            );
+            if (!skip) {
+                const path: Array<string> = [];
+                for (let i = 0; i < levels; i++) {
+                    path.push(position[i].captionPath.join('-'));
+                }
+                putInTree(
+                    tree,
+                    path,
+                    sunburstValues[
+                        rowIndex * sunburstAxes.length + subplotNumber
+                    ].value
+                );
+            }
         });
 
         tree.children.forEach((node) => {
@@ -116,6 +129,9 @@ export const Sunburst = withQueryResult<
                     className="subplotTitle"
                     style={{
                         textAlignLast: 'center',
+                        fontSize: '20px',
+                        color: '#3232d3',
+                        fontWeight: 600,
                     }}
                 >
                     {subtitle}
@@ -147,10 +163,10 @@ export const Sunburst = withQueryResult<
                         height,
                         width,
                         margin: {
-                            l: 0,
-                            r: 0,
-                            b: 0,
-                            t: 0,
+                            l: 50,
+                            r: 50,
+                            b: 50,
+                            t: 50,
                         },
                     }}
                 ></Plot>
