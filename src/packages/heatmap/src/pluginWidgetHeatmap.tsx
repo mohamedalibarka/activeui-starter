@@ -25,8 +25,10 @@ export const pluginWidgetHeatmap: WidgetPlugin<
         },
         rows: {
             role: 'primaryOrdinal',
-            maxNumberOfFields: 2,
         },
+        columns: {
+            role: 'primaryOrdinal',
+        }
     },
     initialState: {
         widgetKey,

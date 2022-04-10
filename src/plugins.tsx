@@ -1,9 +1,9 @@
 import _keyBy from 'lodash/keyBy';
-import { pluginWidgetMap } from './packages/map';
-import { pluginWidgetSunburst } from './packages/sunburst';
-import { pluginMenuItemFilterOnCountries } from './packages/mapfilteroncountries';
-import { pluginWidgetBoxplot } from './packages/boxplot';
-import { pluginWidgetHeatmap } from './packages/heatmap';
+import { pluginWidgetMap } from './packages/map/src/pluginWidgetMap';
+import { pluginWidgetSunburst } from './packages/sunburst/src/pluginWidgetSunburst';
+import { pluginMenuItemFilterOnCountries } from './packages/mapfilteroncountries/src/pluginMenuItemFilterOnCountries';
+import { pluginWidgetBoxplot } from './packages/boxplot/src/pluginWidgetBoxplot';
+import { pluginWidgetHeatmap } from './packages/heatmap/src/pluginWidgetHeatmap';
 import {
     CellPlugin,
     CellStylePlugin,
@@ -79,7 +79,7 @@ const cellStylePlugins: Array<CellStylePlugin<any>> = [
 ];
 
 const menuItemPlugins: Array<MenuItemPlugin<any, any>> = [
-    //pluginMenuItemFilterOnCountries,
+    pluginMenuItemFilterOnCountries,
     pluginMenuItemDuplicateWidget,
     pluginMenuItemFullScreen,
     pluginMenuItemFilterOnEverythingButSelection,
@@ -115,6 +115,10 @@ const widgetPlugins: Array<WidgetPlugin<any, any>> = [
     pluginWidgetMap,
     pluginWidgetPivotTable,
     pluginWidgetHeatmap,
+    pluginWidgetPlotlyAreaChart,
+    pluginWidgetPlotlyBulletChart,
+    pluginWidgetPlotlyDonutChart,
+    pluginWidgetPlotlyLineChart,
 ];
 
 const plotlyWidgetPlugins = widgetPlugins.filter(({ key }) =>

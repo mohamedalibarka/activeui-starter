@@ -9,9 +9,15 @@ const generateHeatmapData = (data: CellSet, subplotNb: number): Data[] => {
     const yLabels = [];
 
     for (const d of heatmapData) {
-        if (d.length !== 2) continue;
+        if (d.length < 2) continue;
         const x = d[0].captionPath[d[0].captionPath.length - 1]; // only keep last element of captionPath ?
         const y = d[1].captionPath[d[1].captionPath.length - 1]; // only keep last element of captionPath ?
+        for (let i = 2; i < d.length; i++) {
+            const x2 = d[i].captionPath[d[i].captionPath.length - 1];
+            if (xLabels.indexOf(x2) === -1) {
+                xLabels.push(x2);
+            }
+        }
         if (xLabels.indexOf(x) === -1) {
             xLabels.push(x);
         }
