@@ -169,18 +169,41 @@ export const Sunburst = withQueryResult<
             </div>
         );
     }
-    console.log('Far');
+    if (
+        props.widgetState.mapping.horizontalSubplots.length == 1 &&
+        props.widgetState.mapping.verticalSubplots.length == 1
+    ) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                Simultaneous horizontal and vertical subplots not yet supported,
+                please choose only one of them.
+            </div>
+        );
+    }
     const plots = [];
-    let percentage = 100;
-    if (sunburstAxes.length > 5) {
-        height /= 2;
-        width /= 3;
-        percentage = 50;
+    let numb = 1;
+    if (props.widgetState.mapping.verticalSubplots.length == 1) {
+        numb = height / 300;
+        width = 300;
+        height = height / numb;
+    } else if (props.widgetState.mapping.horizontalSubplots.length == 1) {
+        numb = width / 300;
+        height = 300;
+        width = width / numb;
+    } else {
+        height = 0.8 * height;
     }
 
     for (
         let subplotNumber = 0;
-        subplotNumber < sunburstAxes.length;
+        subplotNumber < sunburstAxes.length && subplotNumber < numb;
         subplotNumber++
     ) {
         console.log(subplotNumber);
@@ -244,12 +267,10 @@ export const Sunburst = withQueryResult<
         const plot = (
             <div
                 style={{
-                    height: { percentage } + '%',
-                    width: { percentage } + '%',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'space-evenly',
+                    justifyContent: 'center',
                 }}
             >
                 <div
@@ -309,9 +330,12 @@ export const Sunburst = withQueryResult<
             tabIndex={0}
             style={{
                 ...props.style,
-                height: '95%',
+                height: '100%',
                 display: 'flex',
-                flexWrap: 'wrap',
+                flexDirection:
+                    props.widgetState.mapping.verticalSubplots.length == 1
+                        ? 'column'
+                        : 'row',
                 justifyContent: 'space-evenly',
             }}
         >

@@ -34,6 +34,10 @@ export const pluginWidgetSunburst: WidgetPlugin<
             role: 'subplot',
             maxNumberOfFields: 1,
         },
+        verticalSubplots: {
+            role: 'subplot',
+            maxNumberOfFields: 1,
+        },
     },
     initialState: {
         widgetKey,
