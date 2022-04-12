@@ -24,17 +24,118 @@ export const Sunburst = withQueryResult<
     const container = useRef<HTMLDivElement>(null);
     let { height, width } = useComponentSize(container);
     const { data, error, isLoading } = props.queryResult;
-    if (isLoading || !data) {
-        return <Spin />;
+    if (isLoading) {
+        return (
+            <div
+                ref={container}
+                tabIndex={0}
+                style={{
+                    ...props.style,
+                    height: '95%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                }}
+            >
+                <Spin />
+            </div>
+        );
+    }
+    console.log('parsed data', data);
+
+    if (
+        !data ||
+        data.axes.length == 0 ||
+        (data.axes.length < 2 && typeof data.cells[0]?.value == 'number')
+    ) {
+        return (
+            <div
+                ref={container}
+                tabIndex={0}
+                style={{
+                    ...props.style,
+                    height: '95%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-evenly',
+                }}
+            >
+                <Plot
+                    divId="my-div"
+                    data={[
+                        {
+                            type: 'sunburst',
+                            labels: [
+                                'Example',
+                                'Sub Example 1',
+                                'Sub Example 2',
+                            ],
+                            parents: ['', 'Example', 'Example'],
+                            values: [10, 7, 3],
+                            marker: {
+                                line: {
+                                    width: 2,
+                                },
+                            },
+                            branchvalues: 'total',
+                        },
+                    ]}
+                    layout={{
+                        // clickmode: "select",
+                        // dragmode: "lasso",
+                        geo: geoLayoutRef.current,
+                        height,
+                        width,
+                        margin: {
+                            l: 50,
+                            r: 50,
+                            b: 50,
+                            t: 50,
+                        },
+                        colorway: ['#5555613d', '#74708a11'],
+                    }}
+                />
+            </div>
+        );
+    }
+    if (data.cells.length == 0) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                No values
+            </div>
+        );
+    }
+    if (typeof data.cells[0].value != 'number') {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                Measure type {data.axes[0]?.positions[0][0].captionPath[0]} is
+                not compatible with this chart
+            </div>
+        );
     }
 
     if (error) {
         return <div>{error.stackTrace}</div>;
     }
 
-    if (data.axes.length < 2) {
-        return <Spin />;
-    }
+    console.log('parsed', data);
+
+    console.log('Sunburst data : ', data);
     const { onSelectionChange } = props;
 
     const handleHover = (payload: { points: ClickData[] }) => {
@@ -51,7 +152,24 @@ export const Sunburst = withQueryResult<
     const sunburstData = data.axes[1].positions;
     const sunburstValues = data.cells;
 
-    const title = data.axes[0].positions[0][0].namePath[0];
+    const containsNegative = sunburstValues.find(
+        (element) => element.value < 0
+    );
+    if (containsNegative != undefined) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                Contains negative values, not compatible with Sunburst chart
+            </div>
+        );
+    }
+    console.log('Far');
     const plots = [];
     let percentage = 100;
     if (sunburstAxes.length > 5) {
@@ -65,10 +183,15 @@ export const Sunburst = withQueryResult<
         subplotNumber < sunburstAxes.length;
         subplotNumber++
     ) {
+        console.log(subplotNumber);
         const subtitle =
             sunburstAxes[subplotNumber][0].namePath[
                 sunburstAxes[subplotNumber][0].namePath.length - 1
             ];
+        if (subtitle == 'AllMember') {
+            continue;
+        }
+
         const ids: Array<any> = [];
         const labels: Array<any> = [];
         const parents: Array<any> = [];
@@ -99,19 +222,23 @@ export const Sunburst = withQueryResult<
                 for (let i = 0; i < levels; i++) {
                     path.push(position[i].captionPath.join('-'));
                 }
-                putInTree(
-                    tree,
-                    path,
-                    sunburstValues[
+                const positionFound = sunburstValues.find(
+                    (el) =>
+                        el.ordinal ==
                         rowIndex * sunburstAxes.length + subplotNumber
-                    ].value
                 );
+                let valueFound: string | number = 0;
+                if (positionFound != undefined) {
+                    valueFound = positionFound.value;
+                }
+                putInTree(tree, path, valueFound);
             }
         });
 
         tree.children.forEach((node) => {
             tree.value += node.value;
         });
+        console.log(subplotNumber + ' advanced');
 
         addToSunburst(tree, parents, labels, values, ids);
         const plot = (

@@ -23,9 +23,12 @@ export const pluginWidgetBoxplot: WidgetPlugin<
             role: 'primaryNumeric',
             maxNumberOfFields: 1,
         },
-        rows: {
+        xAxis: {
             role: 'primaryOrdinal',
-            maxNumberOfFields: 2,
+            maxNumberOfFields: 1,
+        },
+        splitBy: {
+            role: 'primaryOrdinal',
         },
     },
     initialState: {

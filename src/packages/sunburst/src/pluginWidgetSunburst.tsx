@@ -23,7 +23,11 @@ export const pluginWidgetSunburst: WidgetPlugin<
             role: 'primaryNumeric',
             maxNumberOfFields: 1,
         },
-        rows: {
+        groupBy: {
+            role: 'primaryOrdinal',
+            maxNumberOfFields: 1,
+        },
+        splitBy: {
             role: 'primaryOrdinal',
         },
         horizontalSubplots: {

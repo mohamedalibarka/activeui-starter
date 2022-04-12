@@ -17,14 +17,75 @@ export const Boxplot = withQueryResult<
     const { height, width } = useComponentSize(container);
     const { data, error, isLoading } = props.queryResult;
     if (isLoading || !data) {
-        return <Spin />;
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Spin />
+            </div>
+        );
     }
 
     if (error) {
         return <div>{error.stackTrace}</div>;
     }
     if (data.axes.length < 2) {
-        return <Spin />;
+        return (
+            <div
+                ref={container}
+                tabIndex={0}
+                style={{
+                    ...props.style,
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Plot
+                    data={[
+                        {
+                            y: [0, 1, 2, 3, 4],
+                            type: 'box',
+                            name: 'Set 1',
+                            marker: {
+                                color: '#0d0d0ef7',
+                            },
+                        },
+                        {
+                            y: [6, 4, 2, 10, 4],
+                            type: 'box',
+                            name: 'Set 2',
+                            marker: {
+                                color: '#74708a11',
+                            },
+                        },
+                    ]}
+                    layout={{
+                        yaxis: {
+                            title: 'Measure',
+                        },
+                        xaxis: {
+                            title: 'X Axis',
+                        },
+                        geo: geoLayoutRef.current,
+                        height,
+                        width,
+                        margin: {
+                            l: 50,
+                            r: 50,
+                            b: 50,
+                            t: 50,
+                        },
+                    }}
+                ></Plot>
+            </div>
+        );
     }
     const traces = buildBoxplotData(data);
     return (
