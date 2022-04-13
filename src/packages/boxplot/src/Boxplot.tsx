@@ -34,7 +34,8 @@ export const Boxplot = withQueryResult<
     if (error) {
         return <div>{error.stackTrace}</div>;
     }
-    if (data.axes.length < 2) {
+    console.log(data);
+    if (data.axes.length < 2 || data.axes[1].positions[0].length < 2) {
         return (
             <div
                 ref={container}
@@ -88,6 +89,7 @@ export const Boxplot = withQueryResult<
         );
     }
     const traces = buildBoxplotData(data);
+    console.log(traces);
     return (
         <div
             ref={container}
@@ -101,7 +103,7 @@ export const Boxplot = withQueryResult<
                 data={traces}
                 layout={{
                     yaxis: {
-                        title: data.axes[1].hierarchies[1]?.hierarchy,
+                        title: data.axes[0].positions[0][0].captionPath.at(-1),
                     },
                     xaxis: {
                         title: data.axes[1].hierarchies[0].hierarchy,

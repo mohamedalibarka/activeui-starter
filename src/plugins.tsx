@@ -109,6 +109,23 @@ const titleBarButtonPlugins: Array<TitleBarButtonPlugin<any>> = [
 
 // Order matters: it controls the order of the icons in the widget ribbons.
 const widgetPlugins: Array<WidgetPlugin<any, any>> = [
+    pluginWidgetPlotly100StackedAreaChart,
+    pluginWidgetPlotly100StackedBarChart,
+    pluginWidgetPlotly100StackedColumnChart,
+    pluginWidgetPlotlyAreaChart,
+    pluginWidgetPlotlyBulletChart,
+    pluginWidgetPlotlyClusteredBarChart,
+    pluginWidgetPlotlyClusteredColumnChart,
+    pluginWidgetPlotlyComboChart,
+    pluginWidgetPlotlyDonutChart,
+    pluginWidgetPlotlyGaugeChart,
+    pluginWidgetPlotlyLineChart,
+    pluginWidgetPlotlyPieChart,
+    pluginWidgetPlotlyRadarChart,
+    pluginWidgetPlotlyScatterPlot,
+    pluginWidgetPlotlyStackedAreaChart,
+    pluginWidgetPlotlyStackedBarChart,
+    pluginWidgetPlotlyStackedColumnChart,
     pluginWidgetBoxplot,
     pluginWidgetPlotlyTreeMap,
     pluginWidgetSunburst,
