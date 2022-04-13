@@ -16,7 +16,7 @@ export const Boxplot = withQueryResult<
     const container = useRef<HTMLDivElement>(null);
     const { height, width } = useComponentSize(container);
     const { data, error, isLoading } = props.queryResult;
-    if (isLoading || !data) {
+    if (isLoading) {
         return (
             <div
                 style={{
@@ -35,7 +35,7 @@ export const Boxplot = withQueryResult<
         return <div>{error.stackTrace}</div>;
     }
     console.log(data);
-    if (data.axes.length < 2 || data.axes[1].positions[0].length < 2) {
+    if (!data || data.axes.length < 2 || data.axes[1].positions[0].length < 2) {
         return (
             <div
                 ref={container}
@@ -63,7 +63,7 @@ export const Boxplot = withQueryResult<
                             type: 'box',
                             name: 'Set 2',
                             marker: {
-                                color: '#74708a11',
+                                color: '#706e79',
                             },
                         },
                     ]}
@@ -73,6 +73,9 @@ export const Boxplot = withQueryResult<
                         },
                         xaxis: {
                             title: 'X Axis',
+                        },
+                        title: {
+                            text: 'Boxplot example',
                         },
                         geo: geoLayoutRef.current,
                         height,
