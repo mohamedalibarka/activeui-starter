@@ -12,10 +12,10 @@ const generateHeatmapData = (data: CellSet, subplotNb: number): Data[] => {
         if (d.length !== 2) continue;
         const x = d[0].captionPath[d[0].captionPath.length - 1]; // only keep last element of captionPath ?
         const y = d[1].captionPath[d[1].captionPath.length - 1]; // only keep last element of captionPath ?
-        if (xLabels.indexOf(x) === -1) {
+        if (xLabels.indexOf(x) === -1 && x != 'AllMember') {
             xLabels.push(x);
         }
-        if (yLabels.indexOf(y) === -1) {
+        if (yLabels.indexOf(y) === -1 && y != 'AllMember') {
             yLabels.push(y);
         }
     }
