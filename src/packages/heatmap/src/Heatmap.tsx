@@ -51,7 +51,18 @@ export const Heatmap = withQueryResult<
     }
 
     if (data.axes.length < 2) {
-        return <Spin />;
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                Waiting for X / Y Axis choice
+            </div>
+        );
     }
 
     const heatmapAxes = data.axes[0].positions;
