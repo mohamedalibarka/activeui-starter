@@ -1,6 +1,6 @@
 {
   "name": "@activeui-starter/lib",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "",
   "author": "",
   "homepage": "",
@@ -18,11 +18,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@activeui-starter/boxplot": "^2.1.0",
-    "@activeui-starter/heatmap": "^2.1.0",
-    "@activeui-starter/map": "^2.1.0",
-    "@activeui-starter/mapfilteroncountries": "^2.1.0",
-    "@activeui-starter/sunburst": "^2.1.0"
+    "@activeui-starter/boxplot": "^3.0.0",
+    "@activeui-starter/heatmap": "^3.0.0",
+    "@activeui-starter/map": "^3.0.0",
+    "@activeui-starter/mapfilteroncountries": "^3.0.0",
+    "@activeui-starter/sunburst": "^3.0.0"
   },
   "scripts": {
     "tsc": "tsc",
