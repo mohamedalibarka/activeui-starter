@@ -17,8 +17,33 @@ export const Heatmap = withQueryResult<
     const container = useRef<HTMLDivElement>(null);
     let { height, width } = useComponentSize(container);
     const { data, error, isLoading } = props.queryResult;
-    if (isLoading || !data) {
-        return <Spin />;
+    if (isLoading) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Spin />
+            </div>
+        );
+    }
+    if (!data) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                No data yet
+            </div>
+        );
     }
 
     if (error) {
